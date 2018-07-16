@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
+    <title>成绩查询</title>
+
+    <script>
+    $(document).ready(function(){
+
+        $.ajax({
+            url:"/info/get_score",
+            type:"get",
+            dataType:"json",
+            cache:false,
+            success: function(data,textStatus){
+                var score = data.score;
+                $("#cj").text(score+"分");
+            },
+            error: function(){
+                alert("[!!]Got Error.");
+            }
+        });
+    });
+
+</head>
+<body>
+    <h1 class="text-center">我的成绩</h1>
+    <p id="cj"> </p>
+</body>
+</html>

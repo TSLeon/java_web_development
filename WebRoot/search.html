@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Search</title>
+    <script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js">
+    </script>
+    <script>
+    function btn_clik(){
+        var strId = $('#student_id').val();
+
+        if(strId=="")
+        {
+            alert("[*]Please enter strudent's id!");
+            $("#student_id").focus();
+            return false;
+        }
+        $.ajax({
+            type:"get",
+            url:"/info/search?id="+strId,
+            cache:false,
+            success:function(data,textStatus){
+                //alert("[*]data: \n"+data, + "\n status" + textStatus);
+                $("#rs").text(data);
+            },
+            error: function(){
+                alert("[!!!]Gor error.");
+            }
+        });
+    }
+    </script>
+</head>
+<body>
+    Input id: <input type="text" name="std_id" id="student_id"><br>
+    <button typ="button" onclick="btn_clik()">Submit</button>
+    <h4>Search result</h4>
+    <p id="rs"><p>
+</body>
+</html>
