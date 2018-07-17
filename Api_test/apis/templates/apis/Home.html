@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $.ajax({
+            url:"/apis?",
+            type:"get",
+            data:{"key":"william","type":"text"},
+            cache:false,
+            success:function(data,textStatus){
+                alert(data.name);
+            },
+            error:function(){
+                alert("[*]Got Error.");
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <p>Use Home index to check apis</p>
+</body>
+</html>
