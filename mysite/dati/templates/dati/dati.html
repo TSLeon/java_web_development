@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>答题</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style>
+        #div-btn{
+            text-align: center;
+            }
+        #btn-ans{
+            text-align:center;
+            width:150px;
+            }
+    </style>
+
+    <script type="text/javascript">
+        function click_ok(){
+            var ans_list = new Array();
+            var i;
+            for(i=1;i<=4;i++)
+            {
+                ans_list[i] = $("input[name=radiobutton"+i.toString()+"]:checked").val();
+            }
+            var myDate = new Date();
+            var year   = myDate.getFullYear();
+            var month  = myDate.getMonth()+1;
+            var day    = myDate.getDate();
+            var hour   = myDate.getHours();
+            var minute = myDate.getMinutes();
+            var time   = year + "-" + month + "-" + day + "-" + hour + ":" + minute;
+            $.ajax({
+                url:"/dati/get_score?",
+                type:"get",
+                data:{"ans":ans_list,"time":time},
+                cache:false,
+                success:function(data,textStatus){
+                    var score = data.score;
+                    alert("你的得分是: " + score);
+                },
+                error:function(){
+                    alert("[!!]Got error.");
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+        {% for question in question_list %}
+        <h3 align="center">第{{ question.question_id }}题</h3>
+        <p>{{ question.question_text }}</p>
+        <input type="radio" name="radiobutton{{ question.question_id }}" value="A" checked><span>{{ question.option_one }}</span><br>
+        <input type="radio" name="radiobutton{{ question.question_id }}" value="B"><span>{{ question.option_twe }}</span><br>
+        <input type="radio" name="radiobutton{{ question.question_id }}" value="C"><span>{{ question.option_three }}</span><br>
+        <input type="radio" name="radiobutton{{ question.question_id }}" value="D"><span>{{ question.option_four }}</span><br>
+        {% endfor %}
+
+        <div id="div-btn">
+            <button id="btn-ans" type="button" class="btn btn-success" onclick="click_ok()">交卷</button>
+        </div>
+    </div>
+
+</body>
+</html>
