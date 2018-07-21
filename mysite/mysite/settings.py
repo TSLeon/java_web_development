@@ -25,13 +25,14 @@ SECRET_KEY = 'gkcms&(487#pl8=w3xx^$vjj_qa4^$jet(l=asag=$txb4hz(w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'dati.apps.DatiConfig',
+    #'apis.apps.ApisConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

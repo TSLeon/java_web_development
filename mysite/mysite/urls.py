@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dati/',include('dati.urls')),
+    path('apis/',include('apis.urls')),
     path('',views.index,name="mysite")
 ]
